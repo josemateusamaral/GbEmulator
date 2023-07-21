@@ -1,8 +1,8 @@
-from CPU.InstructionSet__8BITS_LOADS import *
-from CPU.InstructionSet__16BITS_LOADS import *
-from CPU.InstructionSet__8BITS_ALU import *
-from CPU.InstructionSet__16BITS_ARITHMETIC import *
-from CPU.InstructionSet__MISCELLANEOUS import *
+from CPU.InstructionsSet__8BITS_LOADS import *
+from CPU.InstructionsSet__16BITS_LOADS import *
+from CPU.InstructionsSet__8BITS_ALU import *
+from CPU.InstructionsSet__16BITS_ARITHMETIC import *
+from CPU.InstructionsSet__MISCELLANEOUS import *
 from CPU.InstructionsSet__ROTATA_SHIFT import *
 from CPU.InstructionsSet__BIT_OPCODES import *
 from CPU.InstructionsSet__JUMPS import *
@@ -11,17 +11,16 @@ from CPU.InstructionsSet__RESTARTS import *
 from CPU.InstructionsSet__RETURNS import *
 
 class CPU(
-    InstructionSet__8BITS_LOADS,
-    InstructionSet__16BITS_LOADS,
-    InstructionSet__8BITS_ALU,
-    InstructionSet__16BITS_ARITHMETIC,
-    InstructionSet__MISCELLANEOUS,
+    InstructionsSet__8BITS_LOADS,
+    InstructionsSet__16BITS_LOADS,
+    InstructionsSet__8BITS_ALU,
+    InstructionsSet__16BITS_ARITHMETIC,
+    InstructionsSet__MISCELLANEOUS,
     InstructionsSet__ROTATA_SHIFT,
     InstructionsSet__BIT_OPCODES,
     InstructionsSet__JUMPS,
     InstructionsSet__RESTARTS,
     InstructionsSet__RETURNS
-    
 ):
 
     def __init__(self,hardware):
