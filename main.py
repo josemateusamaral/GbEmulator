@@ -1,8 +1,11 @@
 import pygame
-from CPU import *
+from CPU.CPU import *
 
-class gbEmulator (CPU):
+class gbEmulator:
     def __init__(self,gbFile):
+
+        #CPU
+        self.CPU = CPU(self)
 
         #cartrige configue
         self.emulando = False
@@ -18,9 +21,9 @@ class gbEmulator (CPU):
         with open('bootloader.gb','rb') as file:
             read = file.read(1)
             while read:
-                self.bootloader.append(int.from_bytes(read, byteorder='big'))
+                self.bootloader.append(read)
                 read = file.read(1)
-        
+        print(self.bootloader)
         #config vram
         self.vram = []
 
@@ -54,9 +57,7 @@ class gbEmulator (CPU):
             self.display.fill((255,0,0))
             
             # executar instrucao
-            instrucao = self.addressedMemory[self.register_PC]
-            self.execute_instruction(instrucao)
-            self.register_PC += 1
+            self.CPU.execute_instruction(instrucao)
 
             # teclas
             for evento in pygame.event.get():
@@ -84,20 +85,15 @@ class gbEmulator (CPU):
         cartrige size: {len(self.cartrige)} bytes
         bootloader size: {len(self.bootloader)} bytes
 
-        PC: {self.register_PC}
-        A: {self.register_A}
-        B: {self.register_B}
-        C: {self.register_C}
-        D: {self.register_D}
-        E: {self.register_E}
-        F: {self.register_F}
-        H: {self.register_H}
-        I: {self.register_I}
+
+        CPU STATE
+        {self.CPU}
+
 
         MEMORY MAP
         {memoryMap}
         '''
 
 emulacao = gbEmulator('zelda.gb')
-emulacao.emulate()
+#emulacao.emulate()
 print(emulacao)
