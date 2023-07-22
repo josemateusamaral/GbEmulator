@@ -4,7 +4,7 @@
     operações relacionadas com o transporte de dados de 16 bits.  
 '''
 
-class InstructionSet__16BITS_LOADS:
+class InstructionsSet__16BITS_LOADS:
     
 
     '''

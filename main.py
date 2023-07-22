@@ -21,7 +21,9 @@ class gbEmulator:
         with open('bootloader.gb','rb') as file:
             read = file.read(1)
             while read:
-                self.bootloader.append(read)
+                #self.bootloader.append(read.hex().upper())
+                #self.bootloader.append(read)
+                self.bootloader.append(int.from_bytes(read, byteorder='big', signed=False))
                 read = file.read(1)
         print(self.bootloader)
         #config vram
@@ -29,7 +31,7 @@ class gbEmulator:
 
         #adressead memory config
         self.addressedMemory = []
-        for i in range(64000):
+        for i in range(int(2**16)):
             self.addressedMemory.append(0)
 
         #config display
@@ -57,7 +59,7 @@ class gbEmulator:
             self.display.fill((255,0,0))
             
             # executar instrucao
-            self.CPU.execute_instruction(instrucao)
+            self.CPU.cicle()
 
             # teclas
             for evento in pygame.event.get():
@@ -95,5 +97,5 @@ class gbEmulator:
         '''
 
 emulacao = gbEmulator('zelda.gb')
-#emulacao.emulate()
+emulacao.emulate()
 print(emulacao)

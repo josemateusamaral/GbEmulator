@@ -1,6 +1,6 @@
-class InstructionSet__8BITS_ALU:
+class InstructionsSet__8BITS_ALU:
 
-'''
+    '''
     1. ADD A,n
         Description:
             Add n to A.
@@ -11,7 +11,7 @@ class InstructionSet__8BITS_ALU:
             N - Reset.
             H - Set if carry from bit 3.
             C - Set if carry from bit 7
-'''
+    '''
     def instruction_0x87(self):  # ADD A, A
         self.add_to_A(self.register_A)
 

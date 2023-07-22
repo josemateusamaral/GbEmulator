@@ -4,7 +4,7 @@
     operações relacionadas com o transporte de dados de 8 bits.  
 '''
 
-class InstructionSet__8BITS_LOADS:
+class InstructionsSet__8BITS_LOADS:
 
     '''
     1. LD nn,n

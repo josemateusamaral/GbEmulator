@@ -1,4 +1,4 @@
-class InstructionSet__MISCELLANEOUS:
+class InstructionsSet__MISCELLANEOUS:
 
     #1
     def instruction_0xCB37(self):  # SWAP A

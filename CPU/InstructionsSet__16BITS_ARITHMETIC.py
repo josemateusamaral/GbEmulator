@@ -1,4 +1,4 @@
-class InstructionSet__16BITS_ARITHMETIC:
+class InstructionsSet__16BITS_ARITHMETIC:
     
     #1
     def instruction_0x09(self):  # ADD HL, BC
@@ -68,33 +68,46 @@ class InstructionSet__16BITS_ARITHMETIC:
 
     #3
     def instruction_0x03(self):  # INC BC
-        self.register_BC = self.increment(self.register_BC())
+        register_BC = self.register_BC()
+        register_BC += 1
+        self.register_B = (register_BC >> 8) & 0xFF
+        self.register_C = register_BC & 0xFF
 
     def instruction_0x13(self):  # INC DE
-        self.register_DE = self.increment(self.register_DE())
+        register_DE = self.register_DE()
+        register_DE += 1
+        self.register_D = (register_DE >> 8) & 0xFF
+        self.register_E = register_DE & 0xFF
 
     def instruction_0x23(self):  # INC HL
-        self.register_HL = self.increment(self.register_HL())
+        register_HL = self.register_HL()
+        register_HL += 1
+        self.register_H = (register_HL >> 8) & 0xFF
+        self.register_L = register_HL & 0xFF
 
     def instruction_0x33(self):  # INC SP
-        self.register_SP = self.increment(self.register_SP)
+        self.register_SP += 1
 
-    def increment(self, value):
-        return (value + 1) & 0xFFFF
 
 
     #4
-    def instruction_0x0B(self):  # DEC BC
-        self.register_BC = self.decrement(self.register_BC())
+    def instruction_0x03(self):  # DEC BC
+        register_BC = self.register_BC()
+        register_BC -= 1
+        self.register_B = (register_BC >> 8) & 0xFF
+        self.register_C = register_BC & 0xFF
 
-    def instruction_0x1B(self):  # DEC DE
-        self.register_DE = self.decrement(self.register_DE())
+    def instruction_0x13(self):  # DEC DE
+        register_DE = self.register_DE()
+        register_DE -= 1
+        self.register_D = (register_DE >> 8) & 0xFF
+        self.register_E = register_DE & 0xFF
 
-    def instruction_0x2B(self):  # DEC HL
-        self.register_HL = self.decrement(self.register_HL())
+    def instruction_0x23(self):  # DEC HL
+        register_HL = self.register_HL()
+        register_HL -= 1
+        self.register_H = (register_HL >> 8) & 0xFF
+        self.register_L = register_HL & 0xFF
 
-    def instruction_0x3B(self):  # DEC SP
-        self.register_SP = self.decrement(self.register_SP)
-
-    def decrement(self, value):
-        return (value - 1) & 0xFFFF
+    def instruction_0x33(self):  # DEC SP
+        self.register_SP -= 1
