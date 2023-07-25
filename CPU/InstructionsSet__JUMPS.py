@@ -2,78 +2,74 @@ class InstructionsSet__JUMPS:
 
 
     #1
-    def instruction_C3(self):
+    def instruction_0xC3(self):
         # Combine the next two bytes to form the jump address nn
         low_byte = self.fetch()
         high_byte = self.fetch()
         jump_address = (high_byte << 8) | low_byte
 
         # Set the program counter (PC) to the jump address
-        self.program_counter = jump_address
+        self.register_PC = jump_address
 
 
     #2
-    def instruction_C2(self):
+    def instruction_0xC2(self):
         if not self.get_flag("Z"):
             low_byte = self.fetch()
             high_byte = self.fetch()
             jump_address = (high_byte << 8) | low_byte
-            self.program_counter = jump_address
+            self.register_PC = jump_address
 
-    def instruction_CA(self):
+    def instruction_0xCA(self):
         if self.get_flag("Z"):
             low_byte = self.fetch()
             high_byte = self.fetch()
             jump_address = (high_byte << 8) | low_byte
-            self.program_counter = jump_address
+            self.register_PC = jump_address
 
-    def instruction_D2(self):
+    def instruction_0xD2(self):
         if not self.get_flag("C"):
             low_byte = self.fetch()
             high_byte = self.fetch()
             jump_address = (high_byte << 8) | low_byte
-            self.program_counter = jump_address
+            self.register_PC = jump_address
 
-    def instruction_DA(self):
+    def instruction_0xDA(self):
         if self.get_flag("C"):
             low_byte = self.fetch()
             high_byte = self.fetch()
             jump_address = (high_byte << 8) | low_byte
-            self.program_counter = jump_address
+            self.register_PC = jump_address
 
 
     #3
-    def instruction_E9(self):
+    def instruction_0xE9(self):
         jump_address = self.combine_registers(self.register_H, self.register_L)
-        self.program_counter = jump_address
+        self.register_PC = jump_address
 
 
     #4
-    def instruction_18(self):
+    def instruction_0x18(self):
         n = self.get_immediate_signed()
-        self.program_counter = (self.program_counter + n) & 0xFFFF
+        self.register_PC = (self.register_PC + n) & 0xFFFF
 
 
     #5
-    def instruction_20(self):
-        if not self.test_flag(Flags.Z):
-            n = self.get_immediate_signed()
-            self.program_counter = (self.program_counter + n) & 0xFFFF
+    def instruction_0x20(self):
+        if not self.get_flag('Z'):
+            self.register_PC = self.hardware.addressedMemory[self.register_PC+1]
 
-    def instruction_28(self):
-        if self.test_flag(Flags.Z):
-            n = self.get_immediate_signed()
-            self.program_counter = (self.program_counter + n) & 0xFFFF
+    def instruction_0x28(self):
+        if self.get_flag('Z'):
+            self.register_PC = self.hardware.addressedMemory[self.register_PC+1]
 
-    def instruction_30(self):
-        if not self.test_flag(Flags.C):
-            n = self.get_immediate_signed()
-            self.program_counter = (self.program_counter + n) & 0xFFFF
+    def instruction_0x30(self):
+        if not self.get_flag('C'):
+            self.register_PC = self.hardware.addressedMemory[self.register_PC+1]
 
-    def instruction_38(self):
-        if self.test_flag(Flags.C):
-            n = self.get_immediate_signed()
-            self.program_counter = (self.program_counter + n) & 0xFFFF
+    def instruction_0x38(self):
+        if self.get_flag('C'):
+            self.register_PC = self.hardware.addressedMemory[self.register_PC+1]
 
 
 

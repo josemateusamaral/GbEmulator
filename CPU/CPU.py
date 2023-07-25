@@ -23,6 +23,8 @@ class CPU(
     InstructionsSet__RETURNS
 ):
 
+
+
     def __init__(self,hardware):
         self.hardware = hardware
         self.register_A = 0
@@ -81,10 +83,20 @@ class CPU(
 
         #pegar instrucao e identificar sua copia
         instrucao = self.hardware.addressedMemory[self.register_PC]
-        funcao_instrucao = 'instruction_0x' + str(hex(instrucao))[2:].strip().upper()
+        opcode = str(hex(instrucao))[2:].replace(' ','').upper()
+        if len(opcode) == 1:
+            opcode = '0' + opcode
+        funcao_instrucao = 'instruction_0x' + opcode
 
         if funcao_instrucao != 'instruction_0x0':
             #verificar se a instrucao identificada ja foi implentada
+            
+            #verificar se a instrucao é uma instrução CB
+            if funcao_instrucao == 'instruction_0xCB':
+                self.register_PC += 1
+                instrucao = self.hardware.addressedMemory[self.register_PC]
+                funcao_instrucao += str(hex(instrucao))[2:].replace(' ','').upper()
+
             if hasattr(self,funcao_instrucao):
                 
                 eval('self.' + funcao_instrucao + '()')

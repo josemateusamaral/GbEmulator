@@ -66,6 +66,9 @@ class InstructionsSet__16BITS_ARITHMETIC:
         return (value + 128) & 0xFF - 128
 
 
+
+
+
     #3
     def instruction_0x03(self):  # INC BC
         register_BC = self.register_BC()
@@ -93,6 +96,7 @@ class InstructionsSet__16BITS_ARITHMETIC:
     #4
     def instruction_0x03(self):  # DEC BC
         register_BC = self.register_BC()
+
         register_BC -= 1
         self.register_B = (register_BC >> 8) & 0xFF
         self.register_C = register_BC & 0xFF
