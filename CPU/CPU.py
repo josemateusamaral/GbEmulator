@@ -26,6 +26,8 @@ class CPU(
 
 
     def __init__(self,hardware):
+        self.log = ''
+
         self.hardware = hardware
         self.register_A = 0
         self.register_B = 0
@@ -101,6 +103,7 @@ class CPU(
                 
                 eval('self.' + funcao_instrucao + '()')
                 print(funcao_instrucao + ' executada')  
+                self.log += '\n' + funcao_instrucao + ' executada'
 
                 '''
                 try:
@@ -129,3 +132,9 @@ class CPU(
         H: {self.register_H}
         I: {self.register_I}
         '''
+
+
+
+    #instrucoes especiais
+    def instruction_0xCB7C(self):
+        self.set_flag('Z',((self.register_H >> 7) & 1 == False))

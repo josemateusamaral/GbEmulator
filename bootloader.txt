@@ -7,9 +7,9 @@ LD SP,$fffe		; $31, $fe, $ff
 XOR A			; $af
 LD HL,$9fff		; $21, $ff, $9f
 Addr_0007:
-LD (HL-),A		; $32
-BIT 7,H		; $cb, $7c
-JR NZ, Addr_0007	; $20, $fb
+    LD (HL-),A		; $32
+    BIT 7,H		; $cb, $7c
+    JR NZ, Addr_0007	; $20, $fb
 
 ; Setup Audio
 LD HL,$ff26		; $21, $26, $ff

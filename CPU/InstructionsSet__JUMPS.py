@@ -57,19 +57,26 @@ class InstructionsSet__JUMPS:
     #5
     def instruction_0x20(self):
         if not self.get_flag('Z'):
-            self.register_PC = self.hardware.addressedMemory[self.register_PC+1]
+            n = self.hardware.addressedMemory[self.register_PC + 1]
+            self.register_PC += n#self.hardware.addressedMemory[self.register_PC]
 
     def instruction_0x28(self):
         if self.get_flag('Z'):
-            self.register_PC = self.hardware.addressedMemory[self.register_PC+1]
+            #self.register_PC = self.hardware.addressedMemory[self.register_PC+1]
+            n = self.hardware.addressedMemory[self.register_PC + 1]
+            self.register_PC += n
 
     def instruction_0x30(self):
         if not self.get_flag('C'):
-            self.register_PC = self.hardware.addressedMemory[self.register_PC+1]
+            #self.register_PC = self.hardware.addressedMemory[self.register_PC+1]
+            n = self.hardware.addressedMemory[self.register_PC + 1]
+            self.register_PC += n
 
     def instruction_0x38(self):
         if self.get_flag('C'):
-            self.register_PC = self.hardware.addressedMemory[self.register_PC+1]
+            n = self.hardware.addressedMemory[self.register_PC + 1]
+            self.register_PC += n
+            #self.register_PC = self.hardware.addressedMemory[self.register_PC+1]
 
 
 

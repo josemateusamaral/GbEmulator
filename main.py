@@ -76,6 +76,8 @@ class gbEmulator:
             pygame.display.flip()
         # Encerrando o Pygame
         pygame.quit()
+        with open('CPU_log.txt','w') as file:
+            file.write(self.CPU.log)
 
     def __str__(self):
         memoryMap = ''
@@ -128,4 +130,4 @@ class gbEmulator:
 
 emulacao = gbEmulator('zelda.gb')
 emulacao.emulate()
-print(emulacao)
+#print(emulacao)
